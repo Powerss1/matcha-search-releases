@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matcha Search — a calmer, private browser</title>
+<meta name="description" content="Matcha Search is a privacy-first browser for Windows. No telemetry, no accounts, no sync. Download the latest signed build and verify its SHA-256.">
+<style>
+  :root {
+    --bg: #f4f8f5;
+    --surface: #ffffff;
+    --surface-alt: #eaf3ee;
+    --line: #d6e5db;
+    --text: #12211a;
+    --muted: #557063;
+    --accent: #1f8f5f;
+    --accent-deep: #177a4f;
+    --accent-ink: #ffffff;
+    --shadow: 0 22px 60px rgba(21, 60, 42, .12);
+    --code-bg: #0d1712;
+    --code-text: #c9f7dd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b1210;
+      --surface: #131f19;
+      --surface-alt: #0e1813;
+      --line: #284437;
+      --text: #e8f3ec;
+      --muted: #94ada1;
+      --accent: #7ce0a8;
+      --accent-deep: #4bbf83;
+      --accent-ink: #06150e;
+      --shadow: 0 26px 70px rgba(0, 0, 0, .55);
+      --code-bg: #0a110e;
+      --code-text: #b9f5d5;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(1100px 620px at 18% -8%, rgba(124, 224, 168, .16), transparent 62%),
+      radial-gradient(900px 540px at 92% 4%, rgba(75, 191, 131, .12), transparent 58%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-deep); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+  header.site {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 0 6px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 650; letter-spacing: .2px; }
+  .brand svg { width: 34px; height: 34px; }
+  .brand span { font-size: 17px; }
+  nav.links { display: flex; align-items: center; gap: 22px; font-size: 13.5px; color: var(--muted); }
+  nav.links a { color: var(--muted); }
+  nav.links a:hover { color: var(--text); text-decoration: none; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    gap: 48px;
+    align-items: center;
+    padding: 70px 0 42px;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent-deep);
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 13px;
+  }
+  h1 {
+    font-size: clamp(38px, 5.2vw, 62px);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    margin: 22px 0 18px;
+    font-weight: 700;
+  }
+  .lede { font-size: 18px; color: var(--muted); max-width: 34ch; margin: 0 0 30px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    height: 50px; padding: 0 24px;
+    border-radius: 14px;
+    font-size: 15px; font-weight: 600;
+    border: 1px solid transparent;
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: var(--accent-ink);
+    box-shadow: 0 14px 32px rgba(31, 143, 95, .28);
+  }
+  .btn-primary:hover { transform: translateY(-1px); text-decoration: none; box-shadow: 0 18px 40px rgba(31, 143, 95, .34); }
+  .btn-ghost { background: var(--surface); border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover { background: var(--surface-alt); text-decoration: none; }
+  .meta-line { margin-top: 18px; font-size: 12.5px; color: var(--muted); }
+  .meta-line code { font-size: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+  .ship-card { padding: 26px; }
+  .ship-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+  .ship-head h2 { font-size: 15px; margin: 0; letter-spacing: .01em; }
+  .pill {
+    font-size: 11.5px; font-weight: 650; letter-spacing: .04em;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--surface-alt); border: 1px solid var(--line); color: var(--accent-deep);
+  }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 10px 16px; font-size: 12.5px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; word-break: break-all; }
+  .hash {
+    font-family: "Cascadia Code", "Consolas", ui-monospace, monospace;
+    font-size: 11px; line-height: 1.5;
+    background: var(--code-bg); color: var(--code-text);
+    border-radius: 10px; padding: 10px 12px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .hash span { overflow-wrap: anywhere; }
+  .copy {
+    flex: none; border: 0; border-radius: 8px; cursor: pointer;
+    background: rgba(124, 224, 168, .14); color: var(--code-text);
+    font: inherit; font-size: 10.5px; padding: 5px 9px;
+  }
+  .divider { height: 1px; background: var(--line); margin: 20px 0; }
+
+  .section { padding: 56px 0; }
+  .section h2 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .section p.sub { color: var(--muted); margin: 0 0 28px; max-width: 66ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .feature { padding: 22px; }
+  .feature .glyph {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: var(--surface-alt); color: var(--accent-deep);
+    display: grid; place-items: center; margin-bottom: 14px;
+    font-size: 17px;
+  }
+  .feature h3 { font-size: 14.5px; margin: 0 0 6px; }
+  .feature p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
+  .step { padding: 22px; position: relative; }
+  .step::before {
+    counter-increment: step;
+    content: counter(step);
+    display: grid; place-items: center;
+    width: 28px; height: 28px; border-radius: 9px;
+    background: var(--accent); color: var(--accent-ink);
+    font-weight: 700; font-size: 13px; margin-bottom: 12px;
+  }
+  .step h3 { font-size: 14px; margin: 0 0 6px; }
+  .step p { font-size: 12.5px; color: var(--muted); margin: 0; }
+  .step code { font-size: 11.5px; }
+
+  .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .shot { overflow: hidden; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot figcaption { font-size: 11.5px; color: var(--muted); padding: 10px 14px; border-top: 1px solid var(--line); }
+
+  .callout {
+    display: grid; grid-template-columns: auto 1fr; gap: 16px;
+    padding: 20px 22px; align-items: start;
+  }
+  .callout .badge-shield {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--surface-alt); color: var(--accent-deep);
+    display: grid; place-items: center;
+  }
+  .callout h3 { margin: 0 0 4px; font-size: 14px; }
+  .callout p { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .callout pre {
+    margin: 10px 0 0; padding: 12px 14px; border-radius: 10px;
+    background: var(--code-bg); color: var(--code-text);
+    overflow-x: auto; font-size: 11.5px; line-height: 1.6;
+  }
+
+  footer.site {
+    border-top: 1px solid var(--line);
+    margin-top: 40px; padding: 26px 0 44px;
+    display: flex; flex-wrap: wrap; gap: 14px;
+    align-items: center; justify-content: space-between;
+    font-size: 12.5px; color: var(--muted);
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 34px; padding-top: 46px; }
+    .grid, .steps, .shots { grid-template-columns: 1fr; }
+    nav.links { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="tile" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2e7a55"/>
+            <stop offset="1" stop-color="#0b2419"/>
+          </linearGradient>
+          <linearGradient id="leaf" x1="22" y1="42" x2="52" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#7ce0a8"/>
+            <stop offset="1" stop-color="#ddffed"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#tile)"/>
+        <path d="M24 38C24 22.5 36 11.5 52 10.5c.6 16-9.2 28.6-28 27.5Z" fill="url(#leaf)"/>
+        <path d="M24 38 12 51.5" stroke="url(#leaf)" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M24 38c6-7 13.4-13 21.6-17.6" fill="none" stroke="#2e7a55" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+      </svg>
+      <span>Matcha Search</span>
+    </div>
+    <nav class="links">
+      <a href="#verify">Verify</a>
+      <a href="#warning">Windows warning</a>
+      <a href="#features">Features</a>
+      <a href="https://github.com/Powerss1/matcha-search-releases/releases">Releases</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Windows 10 &amp; 11 · x64</span>
+      <h1>A calmer, private way to browse.</h1>
+      <p class="lede">No telemetry. No accounts. No sync. A Chromium shell that blocks trackers before they load and keeps every byte on your machine.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="download" href="https://github.com/Powerss1/matcha-search-releases/releases/latest">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/>
+          </svg>
+          <span id="download-label">Download for Windows</span>
+        </a>
+        <a class="btn btn-ghost" href="#verify">Check the checksum</a>
+      </div>
+      <p class="meta-line">
+        Version <strong id="version">1.1.0</strong> ·
+        <span id="size">60.5 MB</span> ·
+        Portable, no installer, per-user data in <code>%APPDATA%\Matcha</code>.
+      </p>
+    </div>
+
+    <div class="card ship-card">
+      <div class="ship-head">
+        <h2>Current build</h2>
+        <span class="pill" id="pill-version">v1.1.0</span>
+      </div>
+      <dl class="kv">
+        <dt>Package</dt><dd id="file-name">MatchaSearch-win-x64-1.1.0.zip</dd>
+        <dt>Channel</dt><dd>Stable</dd>
+        <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
+      </dl>
+      <div class="divider"></div>
+      <div class="kv" style="grid-template-columns: 1fr;">
+        <dt>SHA-256</dt>
+        <dd>
+          <div class="hash">
+            <span id="sha256">d2f59e4555ea7f3e08677641b53d2b3990452b8539fe7bb9b17339472509abf8</span>
+            <button class="copy" id="copy-hash" type="button">Copy</button>
+          </div>
+        </dd>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verify">
+    <h2>Verify the download</h2>
+    <p class="sub">The package is served from GitHub Releases. Comparing the hash takes ten seconds and proves the file on your disk is exactly what was published — even if a mirror or a proxy touched it.</p>
+    <div class="card callout" style="margin-bottom:18px">
+      <div class="badge-shield">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l7 3v5.5c0 4.6-2.9 8.3-7 9.5-4.1-1.2-7-4.9-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div>
+        <h3>PowerShell check</h3>
+        <p>Run this in the folder that holds the zip. The printed hash must match the one on this page.</p>
+        <pre>Get-FileHash .\MatchaSearch-win-x64-1.1.0.zip -Algorithm SHA256 | Format-List</pre>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="card step">
+        <h3>Hash matches</h3>
+        <p>The archive is intact. Extract it anywhere and run <code>MatchaSearch.exe</code>.</p>
+      </div>
+      <div class="card step">
+        <h3>Hash does not match</h3>
+        <p>Delete the file and download again from the official release page. Do not run it.</p>
+      </div>
+      <div class="card step">
+        <h3>Keep the manifest</h3>
+        <p><code>latest.json</code> carries the version, URL, size and SHA-256 that the in-app updater checks before applying an update.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="warning">
+    <h2>If Windows shows a warning</h2>
+    <p class="sub">Matcha Search is currently published without a commercial code-signing certificate, so Windows SmartScreen shows “Windows protected your PC” the first time you run it. That message means “unknown publisher”, not “malware”. You can confirm the build yourself:</p>
+    <div class="steps">
+      <div class="card step">
+        <h3>Check the hash first</h3>
+        <p>Use the PowerShell command above. This is the check that actually proves the file is ours; the SmartScreen dialog cannot.</p>
+      </div>
+      <div class="card step">
+        <h3>Open “More info”</h3>
+        <p>In the blue dialog, click <strong>More info</strong>, confirm the file name is <code>MatchaSearch-win-x64-…zip</code> / <code>MatchaSearch.exe</code>, then choose <strong>Run anyway</strong>.</p>
+      </div>
+      <div class="card step">
+        <h3>Next launches are quiet</h3>
+        <p>SmartScreen only prompts on new, unknown files. Once it is on disk and matches the hash, normal launches start without the dialog.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>What it does</h2>
+    <p class="sub">Small surface, strong defaults. Everything below is on-device; the browser itself makes exactly one kind of background request — optional filter-list updates.</p>
+    <div class="grid">
+      <div class="card feature">
+        <div class="glyph">◈</div>
+        <h3>Tracker shield</h3>
+        <p>109k+ rules matched before a request leaves the browser, with per-site pause from the shield panel.</p>
+      </div>
+      <div class="card feature">
+        <div class="glyph">⌁</div>
+        <h3>Encrypted DNS</h3>
+        <p>DNS-over-HTTPS and HTTPS-only transport are enabled by default, with a clear toggle for each.</p>
+      </div>
+      <div class="card feature">
+        <div class="glyph">◐</div>
+        <h3>Black &amp; white</h3>
+        <p>Two themes that recolor the window and every internal page with animated transitions.</p>
+      </div>
+      <div class="card feature">
+        <div class="glyph">⬡</div>
+        <h3>Extensions library</h3>
+        <p>Three bundled, on-device extensions plus a folder importer. No store, no remote install prompts.</p>
+      </div>
+      <div class="card feature">
+        <div class="glyph">⌘</div>
+        <h3>Private windows</h3>
+        <p>A separate profile with its own cookies and storage; extensions stay off in private mode.</p>
+      </div>
+      <div class="card feature">
+        <div class="glyph">↻</div>
+        <h3>Signed updates</h3>
+        <p>The updater reads <code>latest.json</code>, downloads over HTTPS and verifies SHA-256 before touching the install.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>A look inside</h2>
+    <p class="sub">The screenshots come from the shipped build.</p>
+    <div class="shots">
+      <figure class="card shot"><img src="screenshots/newtab.png" alt="Matcha Search new tab page" loading="lazy"><figcaption>New tab · speed dial and privacy status</figcaption></figure>
+      <figure class="card shot"><img src="screenshots/settings.png" alt="Matcha Search settings" loading="lazy"><figcaption>Settings · theme and privacy switches</figcaption></figure>
+      <figure class="card shot"><img src="screenshots/extensions.png" alt="Matcha Search extensions library" loading="lazy"><figcaption>Extensions · bundled catalog</figcaption></figure>
+    </div>
+  </section>
+
+  <footer class="site">
+    <span>Matcha Search 1.1 · local by design. Closed-source build, published binaries.</span>
+    <span><a href="https://github.com/Powerss1/matcha-search-releases/releases">Releases</a> · <a href="https://github.com/Powerss1/matcha-search-releases">Repository</a></span>
+  </footer>
+</div>
+
+<script>
+  const fallback = {
+    version: '1.1.0',
+    url: 'https://github.com/Powerss1/matcha-search-releases/releases/latest',
+    sha256: 'd2f59e4555ea7f3e08677641b53d2b3990452b8539fe7bb9b17339472509abf8',
+    size: 63441341
+  };
+
+  const formatSize = (bytes) => {
+    const mb = bytes / (1024 * 1024);
+    return (mb >= 100 ? mb.toFixed(0) : mb.toFixed(1)) + ' MB';
+  };
+
+  const setText = (id, text) => {
+    const node = document.getElementById(id);
+    if (node) node.textContent = text;
+  };
+
+  const apply = (data) => {
+    const version = data.version || fallback.version;
+    const sha = data.sha256 || fallback.sha256;
+    const size = data.size || fallback.size;
+    const url = data.url || fallback.url;
+
+    setText('version', version);
+    setText('pill-version', 'v' + version);
+    setText('size', formatSize(size));
+    setText('sha256', sha);
+    setText('download-label', 'Download ' + version);
+    setText('file-name', 'MatchaSearch-win-x64-' + version + '.zip');
+
+    const link = document.getElementById('download');
+    if (link) link.href = url;
+
+    const manifest = document.getElementById('manifest-link');
+    if (manifest) manifest.href = 'https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json';
+  };
+
+  apply(fallback);
+
+  fetch('https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json', { cache: 'no-store' })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => { if (data && data.version) apply(data); })
+    .catch(() => {});
+
+  const copy = document.getElementById('copy-hash');
+  if (copy) {
+    copy.addEventListener('click', async () => {
+      const text = document.getElementById('sha256').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        copy.textContent = 'Copied';
+        setTimeout(() => { copy.textContent = 'Copy'; }, 1600);
+      } catch {
+        copy.textContent = 'Select it';
+      }
+    });
+  }
+</script>
+</body>
+</html>
