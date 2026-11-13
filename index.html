@@ -250,7 +250,7 @@
         <a class="btn btn-ghost" href="#verify">Check the checksum</a>
       </div>
       <p class="meta-line">
-        Version <strong id="version">1.1.0</strong> ·
+        Version <strong id="version">1.1.1</strong> ·
         <span id="size">60.5 MB</span> ·
         Portable, no installer, per-user data in <code>%APPDATA%\Matcha</code>.
       </p>
@@ -259,10 +259,10 @@
     <div class="card ship-card">
       <div class="ship-head">
         <h2>Current build</h2>
-        <span class="pill" id="pill-version">v1.1.0</span>
+        <span class="pill" id="pill-version">v1.1.1</span>
       </div>
       <dl class="kv">
-        <dt>Package</dt><dd id="file-name">MatchaSearch-win-x64-1.1.0.zip</dd>
+        <dt>Package</dt><dd id="file-name">MatchaSearch-win-x64-1.1.1.zip</dd>
         <dt>Channel</dt><dd>Stable</dd>
         <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
       </dl>
@@ -271,7 +271,7 @@
         <dt>SHA-256</dt>
         <dd>
           <div class="hash">
-            <span id="sha256">d2f59e4555ea7f3e08677641b53d2b3990452b8539fe7bb9b17339472509abf8</span>
+            <span id="sha256">f1da60f368d8ba35070a183ce448ed63f9289e90ba4d8b1934ec1a34fd614b51</span>
             <button class="copy" id="copy-hash" type="button">Copy</button>
           </div>
         </dd>
@@ -291,7 +291,7 @@
       <div>
         <h3>PowerShell check</h3>
         <p>Run this in the folder that holds the zip. The printed hash must match the one on this page.</p>
-        <pre>Get-FileHash .\MatchaSearch-win-x64-1.1.0.zip -Algorithm SHA256 | Format-List</pre>
+        <pre>Get-FileHash .\MatchaSearch-win-x64-1.1.1.zip -Algorithm SHA256 | Format-List</pre>
       </div>
     </div>
     <div class="steps">
@@ -384,10 +384,10 @@
 
 <script>
   const fallback = {
-    version: '1.1.0',
-    url: 'https://github.com/Powerss1/matcha-search-releases/releases/latest',
-    sha256: 'd2f59e4555ea7f3e08677641b53d2b3990452b8539fe7bb9b17339472509abf8',
-    size: 63441341
+    version: '1.1.1',
+    url: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.1/MatchaSearch-win-x64-1.1.1.zip',
+    sha256: 'f1da60f368d8ba35070a183ce448ed63f9289e90ba4d8b1934ec1a34fd614b51',
+    size: 63449026
   };
 
   const formatSize = (bytes) => {
@@ -422,9 +422,16 @@
 
   apply(fallback);
 
-  fetch('https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json', { cache: 'no-store' })
+  fetch('https://api.github.com/repos/Powerss1/matcha-search-releases/releases/latest', { cache: 'no-store' })
     .then((res) => (res.ok ? res.json() : null))
-    .then((data) => { if (data && data.version) apply(data); })
+    .then((release) => {
+      const match = release && /^v(\d+\.\d+\.\d+)$/.exec(release.tag_name || '');
+      if (!match) return;
+      const asset = (release.assets || []).find((a) => /^MatchaSearch-win-x64-.*\.zip$/.test(a.name));
+      const digest = asset && /^sha256:([0-9a-f]{64})$/.exec(asset.digest || '');
+      if (!asset || !digest) return;
+      apply({ version: match[1], url: asset.browser_download_url, sha256: digest[1], size: asset.size });
+    })
     .catch(() => {});
 
   const copy = document.getElementById('copy-hash');
