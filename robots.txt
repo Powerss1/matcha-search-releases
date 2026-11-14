@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://powerss1.github.io/matcha-search-releases/sitemap.xml

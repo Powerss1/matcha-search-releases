@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matcha Search — Windows için gizlilik odaklı tarayıcı</title>
+<meta name="description" content="Matcha Search, Windows 10 ve 11 için ücretsiz, gizlilik odaklı bir tarayıcı. Telemetri yok, hesap yok, senkronizasyon yok. İzleyiciler ağ seviyesinde engellenir; kurulum dosyası veya taşınabilir ZIP ile indirin.">
+<link rel="canonical" href="https://powerss1.github.io/matcha-search-releases/tr/">
+<link rel="alternate" hreflang="en" href="https://powerss1.github.io/matcha-search-releases/">
+<link rel="alternate" hreflang="tr" href="https://powerss1.github.io/matcha-search-releases/tr/">
+<meta name="theme-color" content="#1f8f5f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matcha Search">
+<meta property="og:url" content="https://powerss1.github.io/matcha-search-releases/tr/">
+<meta property="og:title" content="Matcha Search — Windows için gizlilik odaklı tarayıcı">
+<meta property="og:description" content="Telemetri yok, hesap yok, senkronizasyon yok. İzleyiciler ağ seviyesinde engellenir. Windows 10 ve 11 için ücretsiz.">
+<meta property="og:image" content="https://powerss1.github.io/matcha-search-releases/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Matcha Search — Windows için gizlilik odaklı tarayıcı">
+<meta name="twitter:description" content="Ücretsiz, yerel ve sessiz. İzleyici engelleme, şifreli DNS, imzalı güncellemeler.">
+<meta name="twitter:image" content="https://powerss1.github.io/matcha-search-releases/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Matcha Search",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "softwareVersion": "1.1.5",
+  "inLanguage": "tr",
+  "url": "https://powerss1.github.io/matcha-search-releases/tr/",
+  "downloadUrl": "https://github.com/Powerss1/matcha-search-releases/releases/latest",
+  "description": "Windows için gizlilik odaklı Chromium tarayıcısı. Ağ seviyesinde izleyici engelleme, şifreli DNS, HTTPS zorunluluğu ve imzalı yerinde güncelleme. Hesap yok, telemetri yok, senkronizasyon yok.",
+  "screenshot": "https://powerss1.github.io/matcha-search-releases/screenshots/newtab.png",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+  "publisher": { "@type": "Organization", "name": "Matcha" }
+}
+</script>
+<style>
+  :root {
+    --bg: #f4f8f5;
+    --surface: #ffffff;
+    --surface-alt: #eaf3ee;
+    --line: #d6e5db;
+    --text: #12211a;
+    --muted: #557063;
+    --accent: #1f8f5f;
+    --accent-deep: #177a4f;
+    --accent-ink: #ffffff;
+    --shadow: 0 22px 60px rgba(21, 60, 42, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b1210;
+      --surface: #131f19;
+      --surface-alt: #0e1813;
+      --line: #284437;
+      --text: #e8f3ec;
+      --muted: #94ada1;
+      --accent: #7ce0a8;
+      --accent-deep: #4bbf83;
+      --accent-ink: #06150e;
+      --shadow: 0 26px 70px rgba(0, 0, 0, .55);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(1100px 620px at 18% -8%, rgba(124, 224, 168, .16), transparent 62%),
+      radial-gradient(900px 540px at 92% 4%, rgba(75, 191, 131, .12), transparent 58%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-deep); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+  header.site { display: flex; align-items: center; justify-content: space-between; padding: 26px 0 6px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 650; white-space: nowrap; }
+  .brand svg { width: 34px; height: 34px; }
+  nav.links { display: flex; align-items: center; gap: 20px; font-size: 13.5px; color: var(--muted); flex-wrap: wrap; }
+  nav.links a { color: var(--muted); }
+  nav.links a:hover { color: var(--text); text-decoration: none; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center; padding: 62px 0 38px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-deep); background: var(--surface-alt); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; }
+  h1 { font-size: clamp(34px, 4.8vw, 56px); line-height: 1.07; letter-spacing: -0.03em; margin: 20px 0 16px; font-weight: 700; }
+  .lede { font-size: 17.5px; color: var(--muted); max-width: 40ch; margin: 0 0 28px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 50px; padding: 0 22px; border-radius: 14px; font-size: 15px; font-weight: 600; border: 1px solid transparent; transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-deep)); color: var(--accent-ink); box-shadow: 0 14px 32px rgba(31, 143, 95, .28); }
+  .btn-primary:hover { transform: translateY(-1px); text-decoration: none; }
+  .btn-ghost { background: var(--surface); border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover { background: var(--surface-alt); text-decoration: none; }
+  .meta-line { margin-top: 18px; font-size: 12.5px; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
+  .ship-card { padding: 24px; }
+  .ship-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+  .ship-head h2 { font-size: 15px; margin: 0; }
+  .pill { font-size: 12px; font-weight: 650; padding: 4px 10px; border-radius: 999px; background: var(--surface-alt); border: 1px solid var(--line); color: var(--accent-deep); }
+  dl.kv { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0; font-size: 13.5px; }
+  dl.kv dt { color: var(--muted); }
+  dl.kv dd { margin: 0; overflow-wrap: anywhere; }
+  .divider { height: 1px; background: var(--line); margin: 16px 0; }
+  .hash { display: flex; align-items: center; gap: 10px; font-family: "Cascadia Mono", Consolas, monospace; font-size: 11.5px; }
+  .hash span { overflow-wrap: anywhere; }
+  .copy { flex: 0 0 auto; border: 1px solid var(--line); background: var(--surface-alt); color: var(--text); border-radius: 8px; font-size: 11.5px; padding: 5px 9px; cursor: pointer; }
+  section.section { padding: 34px 0 10px; }
+  section.section h2 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 10px; letter-spacing: -.02em; }
+  .sub { color: var(--muted); max-width: 72ch; margin: 0 0 22px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .step { padding: 20px; }
+  .step h3 { margin: 0 0 8px; font-size: 16px; }
+  .step p { margin: 0; font-size: 14px; color: var(--muted); }
+  .step small { color: var(--muted); }
+  code { font: 12.5px/1.5 "Cascadia Mono", Consolas, monospace; background: var(--surface-alt); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+  pre { margin: 0; padding: 14px 16px; background: var(--surface-alt); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; font: 12.5px/1.6 "Cascadia Mono", Consolas, monospace; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .feature { padding: 20px; }
+  .feature .glyph { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 11px; background: var(--surface-alt); border: 1px solid var(--line); color: var(--accent-deep); font-size: 18px; margin-bottom: 12px; }
+  .feature h3 { margin: 0 0 6px; font-size: 15.5px; }
+  .feature p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+  th { background: var(--surface-alt); font-size: 13px; }
+  tbody tr:last-child td { border-bottom: 0; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .shot { margin: 0; overflow: hidden; }
+  .shot img { width: 100%; display: block; }
+  .shot figcaption { padding: 10px 14px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); }
+  footer.site { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 40px 0 56px; margin-top: 34px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <defs><linearGradient id="leaf" x1="12" y1="46" x2="38" y2="6" gradientUnits="userSpaceOnUse"><stop stop-color="#3bbf83"/><stop offset="1" stop-color="#a9f0c8"/></linearGradient></defs>
+        <path d="M31 7c-11 1-21 8-21 19 0 6 4 10 10 10 11 0 19-10 20-21 .2-2.6-1.4-8-9-8Z" fill="url(#leaf)"/>
+        <path d="M24 38 12 51.5" stroke="url(#leaf)" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+      <span>Matcha Search</span>
+    </div>
+    <nav class="links">
+      <a href="#install">Kurulum</a>
+      <a href="#verify">Doğrulama</a>
+      <a href="#features">Özellikler</a>
+      <a href="../" hreflang="en" lang="en">English</a>
+      <a href="https://github.com/Powerss1/matcha-search-releases/releases">Sürümler</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Windows 10 ve 11 · x64</span>
+      <h1>Windows için sakin ve gizli bir tarayıcı.</h1>
+      <p class="lede">Telemetri yok, hesap yok, senkronizasyon yok. İzleyiciler istek çıkmadan önce engellenir; her şey kendi bilgisayarında kalır.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="download" href="https://github.com/Powerss1/matcha-search-releases/releases/latest">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/>
+          </svg>
+          <span id="download-label">Kurulum dosyasını indir</span>
+        </a>
+        <a class="btn btn-ghost" id="download-portable" href="https://github.com/Powerss1/matcha-search-releases/releases/latest">Taşınabilir ZIP</a>
+        <a class="btn btn-ghost" href="#verify">SHA-256 doğrula</a>
+      </div>
+      <p class="meta-line">
+        Sürüm <strong id="version">1.1.5</strong> ·
+        <span id="size">45 MB</span> ·
+        Yönetici izni gerekmez. Veriler <code>%LOCALAPPDATA%\MatchaSearch</code> altında kalır.
+      </p>
+    </div>
+
+    <div class="card ship-card">
+      <div class="ship-head">
+        <h2>Güncel sürüm</h2>
+        <span class="pill" id="pill-version">v1.1.5</span>
+      </div>
+      <dl class="kv">
+        <dt>Kurulum</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.5.exe</dd>
+        <dt>Taşınabilir</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.5.zip</dd>
+        <dt>Kanal</dt><dd>Kararlı</dd>
+        <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
+      </dl>
+      <div class="divider"></div>
+      <dl class="kv">
+        <dt>Kurulum SHA-256</dt>
+        <dd>
+          <div class="hash">
+            <span id="setup-sha256">2742aa3eaa12a1fd8b57c155b6b437f9e3fb41413d770477b88d0080e562d616</span>
+            <button class="copy" id="copy-hash" type="button">Kopyala</button>
+          </div>
+        </dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <h2>Nasıl kurmak istersiniz?</h2>
+    <p class="sub">Kurulum dosyası tarayıcıyı kullanıcı klasörüne kurar; böylece yönetici şifresi istemeden kendini güncelleyebilir. Taşınabilir ZIP tek klasörde kalır. winget ise kurulumu sizin yerinize yapar.</p>
+    <div class="steps">
+      <div class="card step">
+        <h3>Kurulum dosyası (önerilen)</h3>
+        <p><code id="installer-name">MatchaSearch-setup-x64-1.1.5.exe</code> dosyasını indirip çalıştırın, Başlat menüsünden açın. Yönetici izni istemez; kaldırma kaydı otomatik oluşur.</p>
+      </div>
+      <div class="card step">
+        <h3>Taşınabilir ZIP</h3>
+        <p>Yazılabilir herhangi bir klasöre çıkarın ve <code>MatchaSearch.exe</code> dosyasını çalıştırın. Klasör yazılabilir kaldığı sürece yerinde güncelleme çalışır.</p>
+      </div>
+      <div class="card step">
+        <h3>winget</h3>
+        <p><code>winget install --id Powerss1.MatchaSearch -e</code><br><small>Manifest, winget topluluk deposuna gönderiliyor. Onaylanana kadar yukarıdaki kurulum dosyasını kullanın.</small></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verify">
+    <h2>İndirdiğiniz dosyayı doğrulayın</h2>
+    <p class="sub">Paket GitHub Releases üzerinden sunulur. Hash karşılaştırması on saniye sürer ve diskteki dosyanın yayınlananla birebir aynı olduğunu kanıtlar.</p>
+    <div class="card step" style="margin-bottom:16px">
+      <h3>PowerShell ile kontrol</h3>
+      <p style="margin-bottom:10px">Komutu indirdiğiniz dosyanın bulunduğu klasörde çalıştırın. Çıktı bu sayfadaki hash ile aynı olmalı. Taşınabilir paket için <code>MatchaSearch-win-x64-&lt;sürüm&gt;.zip</code> yazın.</p>
+      <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.5.exe -Algorithm SHA256 | Format-List</pre>
+    </div>
+    <div class="steps">
+      <div class="card step">
+        <h3>Hash eşleşiyor</h3>
+        <p>Dosya sağlam. Kurulumu çalıştırın veya ZIP'i yazılabilir bir klasöre çıkarıp <code>MatchaSearch.exe</code> dosyasını açın.</p>
+      </div>
+      <div class="card step">
+        <h3>Hash eşleşmiyor</h3>
+        <p>Dosyayı silin ve yalnızca resmî sürüm sayfasından yeniden indirin. Eşleşmeyen dosyayı çalıştırmayın.</p>
+      </div>
+      <div class="card step">
+        <h3>Windows uyarı gösterirse</h3>
+        <p>Tarayıcı henüz ticari kod imzalama sertifikası olmadan yayınlandığı için SmartScreen "bilinmeyen yayıncı" uyarısı verir. Önce hash'i doğrulayın, sonra <strong>Ek bilgi → Yine de çalıştır</strong> seçin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>Neler yapar?</h2>
+    <p class="sub">Küçük yüzey, güçlü varsayılanlar. Aşağıdaki özelliklerin tamamı cihaz üzerinde çalışır; tarayıcının tek arka plan isteği isteğe bağlı filtre listesi güncellemesidir.</p>
+    <div class="grid">
+      <div class="card feature"><div class="glyph">◈</div><h3>İzleyici kalkanı</h3><p>İstekler ağa çıkmadan eşleştirilir; EasyList ve EasyPrivacy yüklendiğinde 109 binin üzerinde kural etkin olur. Site bazında kalkan panelinden duraklatılabilir.</p></div>
+      <div class="card feature"><div class="glyph">⌁</div><h3>Şifreli DNS</h3><p>DNS-over-HTTPS ve yalnızca HTTPS modu varsayılan olarak açıktır; ikisi de tek anahtarla kapatılabilir.</p></div>
+      <div class="card feature"><div class="glyph">◐</div><h3>Siyah ve beyaz</h3><p>Pencereyi ve tüm iç sayfaları geçiş animasyonlarıyla yeniden renklendiren iki tema.</p></div>
+      <div class="card feature"><div class="glyph">⬡</div><h3>Eklenti kütüphanesi</h3><p>Cihazda hazır gelen üç eklenti, klasörden içe aktarma ve CRX3/Chrome Web Store paketleri için imza doğrulaması.</p></div>
+      <div class="card feature"><div class="glyph">⌘</div><h3>Gizli pencereler</h3><p>Ayrı profil, ayrı çerezler; eklentiler gizli modda kapalı. Kapatınca profil silinir.</p></div>
+      <div class="card feature"><div class="glyph">↻</div><h3>İmzalı güncellemeler</h3><p>Güncelleyici <code>latest.json</code> dosyasını ECDSA imzası ve SHA-256 ile doğrulamadan hiçbir dosyaya dokunmaz.</p></div>
+      <div class="card feature"><div class="glyph">⇄</div><h3>Sekme yönetimi</h3><p>Kaydırılabilir sekme şeridi, sabitleme, sessize alma, sürükleyerek sıralama ve <code>Ctrl+Shift+A</code> ile sekme arama.</p></div>
+      <div class="card feature"><div class="glyph">文</div><h3>Türkçe arayüz</h3><p>Pencere, menüler ve iç sayfalar Türkçe ve İngilizce arasında canlı geçiş yapar; dil değişince yeniden başlatma gerekmez.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Neden Matcha?</h2>
+    <table>
+      <thead><tr><th>Konu</th><th>Tipik tarayıcı</th><th>Matcha Search</th></tr></thead>
+      <tbody>
+        <tr><td>Hesap</td><td>Genellikle senkronizasyon için gerekir</td><td>Yok; her şey bu cihazda</td></tr>
+        <tr><td>Telemetri</td><td>Kullanım ölçümleri açık olabilir</td><td>Telemetri SDK'sı yok</td></tr>
+        <tr><td>Reklam ve izleyici</td><td>Eklentiye bırakılır</td><td>İstek çıkmadan ağ seviyesinde engellenir</td></tr>
+        <tr><td>Varsayılan gizlilik</td><td>Kullanıcı ayarlar</td><td>HTTPS-only, DoH, izleyici engelleme ve izin reddi açık gelir</td></tr>
+        <tr><td>Kurulum</td><td>Yönetici izni isteyebilir</td><td>Kullanıcı klasörüne kurulur, yönetici izni gerekmez</td></tr>
+        <tr><td>Güncelleme</td><td>Arka planda sessiz</td><td>ECDSA imzalı manifest, kullanıcıya sorarak yerinde güncelleme</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>İçinden bir bakış</h2>
+    <p class="sub">Görüntüler yayınlanan sürümden alınmıştır.</p>
+    <div class="shots">
+      <figure class="card shot"><img src="../screenshots/newtab.png" alt="Matcha Search yeni sekme sayfası" loading="lazy"><figcaption>Yeni sekme · hızlı erişim ve gizlilik durumu</figcaption></figure>
+      <figure class="card shot"><img src="../screenshots/settings.png" alt="Matcha Search ayarları" loading="lazy"><figcaption>Ayarlar · tema ve gizlilik anahtarları</figcaption></figure>
+      <figure class="card shot"><img src="../screenshots/extensions.png" alt="Matcha Search eklenti kütüphanesi" loading="lazy"><figcaption>Eklentiler · cihazdaki katalog</figcaption></figure>
+    </div>
+  </section>
+
+  <footer class="site">
+    <span>Matcha Search 1.1.5 · yerel tasarım. Kaynak kapalı, ikili dosyalar herkese açık.</span>
+    <span><a href="../">English</a> · <a href="https://github.com/Powerss1/matcha-search-releases/releases">Sürümler</a> · <a href="https://github.com/Powerss1/matcha-search-releases">Depo</a></span>
+  </footer>
+</div>
+
+<script>
+  const fallback = {
+    version: '1.1.5',
+    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.5/MatchaSearch-setup-x64-1.1.5.exe',
+    setupSha256: '2742aa3eaa12a1fd8b57c155b6b437f9e3fb41413d770477b88d0080e562d616',
+    setupSize: 46883014,
+    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.5/MatchaSearch-win-x64-1.1.5.zip',
+    zipSize: 65696572
+  };
+
+  const formatSize = (bytes) => {
+    const mb = bytes / (1024 * 1024);
+    return (mb >= 100 ? mb.toFixed(0) : mb.toFixed(1)) + ' MB';
+  };
+  const setText = (id, text) => {
+    const node = document.getElementById(id);
+    if (node) node.textContent = text;
+  };
+  const apply = (data) => {
+    const version = data.version || fallback.version;
+    const setupUrl = data.setupUrl || fallback.setupUrl;
+    const setupSha = data.setupSha256 || fallback.setupSha256;
+    const setupSize = data.setupSize || fallback.setupSize;
+    const zipUrl = data.zipUrl || fallback.zipUrl;
+    const zipSize = data.zipSize || fallback.zipSize;
+
+    setText('version', version);
+    setText('pill-version', 'v' + version);
+    setText('size', formatSize(setupSize || zipSize));
+    setText('setup-sha256', setupSha);
+    setText('download-label', setupUrl ? 'Kurulum dosyasını indir ' + version : 'İndir ' + version);
+    setText('file-name', 'MatchaSearch-setup-x64-' + version + '.exe');
+    setText('installer-name', 'MatchaSearch-setup-x64-' + version + '.exe');
+    setText('zip-name', 'MatchaSearch-win-x64-' + version + '.zip');
+
+    const link = document.getElementById('download');
+    if (link) link.href = setupUrl || zipUrl;
+    const portable = document.getElementById('download-portable');
+    if (portable) portable.href = zipUrl;
+    const manifest = document.getElementById('manifest-link');
+    if (manifest) manifest.href = 'https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json';
+  };
+
+  apply(fallback);
+
+  const digestOf = (asset) => {
+    const match = asset && /^sha256:([0-9a-f]{64})$/.exec(asset.digest || '');
+    return match ? match[1] : null;
+  };
+
+  fetch('https://api.github.com/repos/Powerss1/matcha-search-releases/releases/latest', { cache: 'no-store' })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((release) => {
+      const match = release && /^v(\d+\.\d+\.\d+)$/.exec(release.tag_name || '');
+      if (!match) return;
+      const assets = release.assets || [];
+      const setup = assets.find((a) => /^MatchaSearch-setup-x64-.*\.exe$/.test(a.name));
+      const zip = assets.find((a) => /^MatchaSearch-win-x64-.*\.zip$/.test(a.name));
+      // 1.1.5 öncesi sürümlerde kurulum dosyası yok; o zaman sabit yedek korunur.
+      if (!zip || !setup) return;
+      apply({
+        version: match[1],
+        setupUrl: setup.browser_download_url,
+        setupSha256: digestOf(setup),
+        setupSize: setup.size,
+        zipUrl: zip.browser_download_url,
+        zipSize: zip.size
+      });
+    })
+    .catch(() => {});
+
+  const copy = document.getElementById('copy-hash');
+  if (copy) {
+    copy.addEventListener('click', async () => {
+      const text = document.getElementById('setup-sha256').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        copy.textContent = 'Kopyalandı';
+        setTimeout(() => { copy.textContent = 'Kopyala'; }, 1600);
+      } catch {
+        copy.textContent = 'Seçin';
+      }
+    });
+  }
+</script>
+</body>
+</html>
