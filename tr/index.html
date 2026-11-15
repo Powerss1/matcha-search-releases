@@ -29,7 +29,7 @@
   "name": "Matcha Search",
   "applicationCategory": "BrowserApplication",
   "operatingSystem": "Windows 10, Windows 11",
-  "softwareVersion": "1.1.11",
+  "softwareVersion": "1.1.12",
   "inLanguage": "tr",
   "url": "https://powerss1.github.io/matcha-search-releases/tr/",
   "downloadUrl": "https://github.com/Powerss1/matcha-search-releases/releases/latest",
@@ -176,7 +176,7 @@
         <a class="btn btn-ghost" href="#verify">SHA-256 doğrula</a>
       </div>
       <p class="meta-line">
-        Sürüm <strong id="version">1.1.11</strong> ·
+        Sürüm <strong id="version">1.1.12</strong> ·
         <span id="size">45 MB</span> ·
         Yönetici izni gerekmez. Veriler <code>%LOCALAPPDATA%\MatchaSearch</code> altında kalır.
       </p>
@@ -185,11 +185,11 @@
     <div class="card ship-card">
       <div class="ship-head">
         <h2>Güncel sürüm</h2>
-        <span class="pill" id="pill-version">v1.1.11</span>
+        <span class="pill" id="pill-version">v1.1.12</span>
       </div>
       <dl class="kv">
-        <dt>Kurulum</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.11.exe</dd>
-        <dt>Taşınabilir</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.11.zip</dd>
+        <dt>Kurulum</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.12.exe</dd>
+        <dt>Taşınabilir</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.12.zip</dd>
         <dt>Kanal</dt><dd>Kararlı</dd>
         <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
       </dl>
@@ -212,7 +212,7 @@
     <div class="steps">
       <div class="card step">
         <h3>Kurulum dosyası (önerilen)</h3>
-        <p><code id="installer-name">MatchaSearch-setup-x64-1.1.11.exe</code> dosyasını indirip çalıştırın, Başlat menüsünden açın. Yönetici izni istemez; kaldırma kaydı otomatik oluşur.</p>
+        <p><code id="installer-name">MatchaSearch-setup-x64-1.1.12.exe</code> dosyasını indirip çalıştırın, Başlat menüsünden açın. Yönetici izni istemez; kaldırma kaydı otomatik oluşur.</p>
       </div>
       <div class="card step">
         <h3>Taşınabilir ZIP</h3>
@@ -231,7 +231,7 @@
     <div class="card step" style="margin-bottom:16px">
       <h3>PowerShell ile kontrol</h3>
       <p style="margin-bottom:10px">Komutu indirdiğiniz dosyanın bulunduğu klasörde çalıştırın. Çıktı bu sayfadaki hash ile aynı olmalı. Taşınabilir paket için <code>MatchaSearch-win-x64-&lt;sürüm&gt;.zip</code> yazın.</p>
-      <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.11.exe -Algorithm SHA256 | Format-List</pre>
+      <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.12.exe -Algorithm SHA256 | Format-List</pre>
     </div>
     <div class="steps">
       <div class="card step">
@@ -290,19 +290,19 @@
   </section>
 
   <footer class="site">
-    <span>Matcha Search 1.1.11 · yerel tasarım. Kaynak kapalı, ikili dosyalar herkese açık.</span>
+    <span>Matcha Search 1.1.12 · yerel tasarım. Kaynak kapalı, ikili dosyalar herkese açık.</span>
     <span><a href="../">English</a> · <a href="https://github.com/Powerss1/matcha-search-releases/releases">Sürümler</a> · <a href="https://github.com/Powerss1/matcha-search-releases">Depo</a></span>
   </footer>
 </div>
 
 <script>
   const fallback = {
-    version: '1.1.11',
-    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.11/MatchaSearch-setup-x64-1.1.11.exe',
-    setupSha256: '969c5c6ea958474d1e31ae1e149f661d7f501685ac78d93f6e82818c50c2f770',
-    setupSize: 46907850,
-    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.11/MatchaSearch-win-x64-1.1.11.zip',
-    zipSize: 65724028
+    version: '1.1.12',
+    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.12/MatchaSearch-setup-x64-1.1.12.exe',
+    setupSha256: '4d0389c858f3d5b12a870d9fce85635ac9e585690a659ee8c4209484af425e7e',
+    setupSize: 46922330,
+    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.12/MatchaSearch-win-x64-1.1.12.zip',
+    zipSize: 65733784
   };
 
   const formatSize = (bytes) => {
