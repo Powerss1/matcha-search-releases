@@ -30,7 +30,7 @@
   "name": "Matcha Search",
   "applicationCategory": "BrowserApplication",
   "operatingSystem": "Windows 10, Windows 11",
-  "softwareVersion": "1.1.8",
+  "softwareVersion": "1.1.9",
   "url": "https://powerss1.github.io/matcha-search-releases/",
   "downloadUrl": "https://github.com/Powerss1/matcha-search-releases/releases/latest",
   "description": "Privacy-first Chromium shell for Windows with network-level tracker blocking, encrypted DNS, HTTPS-only transport and signed in-place updates. No accounts, no telemetry, no sync.",
@@ -287,7 +287,7 @@
         <a class="btn btn-ghost" href="#verify">Check the checksum</a>
       </div>
       <p class="meta-line">
-        Version <strong id="version">1.1.8</strong> ·
+        Version <strong id="version">1.1.9</strong> ·
         <span id="size">63 MB</span> ·
         Per-user install, no admin rights. Data stays in <code>%LOCALAPPDATA%\MatchaSearch</code>.
       </p>
@@ -296,11 +296,11 @@
     <div class="card ship-card">
       <div class="ship-head">
         <h2>Current build</h2>
-        <span class="pill" id="pill-version">v1.1.8</span>
+        <span class="pill" id="pill-version">v1.1.9</span>
       </div>
       <dl class="kv">
-        <dt>Installer</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.8.exe</dd>
-        <dt>Portable</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.8.zip</dd>
+        <dt>Installer</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.9.exe</dd>
+        <dt>Portable</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.9.zip</dd>
         <dt>Channel</dt><dd>Stable</dd>
         <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
       </dl>
@@ -323,7 +323,7 @@
     <div class="steps">
       <div class="card step">
         <h3>Installer (recommended)</h3>
-        <p>Download <code id="installer-name">MatchaSearch-setup-x64-1.1.8.exe</code>, run it, and launch from the Start menu. No admin prompt, per-user uninstall entry included.</p>
+        <p>Download <code id="installer-name">MatchaSearch-setup-x64-1.1.9.exe</code>, run it, and launch from the Start menu. No admin prompt, per-user uninstall entry included.</p>
       </div>
       <div class="card step">
         <h3>Portable ZIP</h3>
@@ -348,7 +348,7 @@
       <div>
         <h3>PowerShell check</h3>
         <p>Run this in the folder that holds the download. The printed hash must match the one on this page. For the portable package, use <code>MatchaSearch-win-x64-&lt;version&gt;.zip</code> instead.</p>
-        <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.8.exe -Algorithm SHA256 | Format-List</pre>
+        <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.9.exe -Algorithm SHA256 | Format-List</pre>
       </div>
     </div>
     <div class="steps">
@@ -434,20 +434,20 @@
   </section>
 
   <footer class="site">
-    <span>Matcha Search 1.1.8 · local by design. Closed-source build, published binaries.</span>
+    <span>Matcha Search 1.1.9 · local by design. Closed-source build, published binaries.</span>
     <span><a href="https://github.com/Powerss1/matcha-search-releases/releases">Releases</a> · <a href="https://github.com/Powerss1/matcha-search-releases">Repository</a></span>
   </footer>
 </div>
 
 <script>
   const fallback = {
-    version: '1.1.8',
-    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.8/MatchaSearch-setup-x64-1.1.8.exe',
-    setupSha256: 'b769161e8d66798c7a7b57689360ca6f56659e333f5341c59639ea894674d45b',
-    setupSize: 46909606,
-    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.8/MatchaSearch-win-x64-1.1.8.zip',
-    zipSha256: '68a770ec923d7346511d57ff25817940a2b94009c1037ecda0b39e77867bd48e',
-    zipSize: 65723128
+    version: '1.1.9',
+    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.9/MatchaSearch-setup-x64-1.1.9.exe',
+    setupSha256: '1d8833d63f9031d16ebb7b81e6b86e5570ea12ecb437cf2409d022d83a07fa44',
+    setupSize: 46912771,
+    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.9/MatchaSearch-win-x64-1.1.9.zip',
+    zipSha256: '7ed608435ecb77158f5da96fce565b07aeb8adafffde52b079708b34dfaa21aa',
+    zipSize: 65721033
   };
 
   const formatSize = (bytes) => {

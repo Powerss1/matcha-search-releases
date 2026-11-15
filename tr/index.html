@@ -29,7 +29,7 @@
   "name": "Matcha Search",
   "applicationCategory": "BrowserApplication",
   "operatingSystem": "Windows 10, Windows 11",
-  "softwareVersion": "1.1.8",
+  "softwareVersion": "1.1.9",
   "inLanguage": "tr",
   "url": "https://powerss1.github.io/matcha-search-releases/tr/",
   "downloadUrl": "https://github.com/Powerss1/matcha-search-releases/releases/latest",
@@ -176,7 +176,7 @@
         <a class="btn btn-ghost" href="#verify">SHA-256 doğrula</a>
       </div>
       <p class="meta-line">
-        Sürüm <strong id="version">1.1.8</strong> ·
+        Sürüm <strong id="version">1.1.9</strong> ·
         <span id="size">45 MB</span> ·
         Yönetici izni gerekmez. Veriler <code>%LOCALAPPDATA%\MatchaSearch</code> altında kalır.
       </p>
@@ -185,11 +185,11 @@
     <div class="card ship-card">
       <div class="ship-head">
         <h2>Güncel sürüm</h2>
-        <span class="pill" id="pill-version">v1.1.8</span>
+        <span class="pill" id="pill-version">v1.1.9</span>
       </div>
       <dl class="kv">
-        <dt>Kurulum</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.8.exe</dd>
-        <dt>Taşınabilir</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.8.zip</dd>
+        <dt>Kurulum</dt><dd id="file-name">MatchaSearch-setup-x64-1.1.9.exe</dd>
+        <dt>Taşınabilir</dt><dd id="zip-name">MatchaSearch-win-x64-1.1.9.zip</dd>
         <dt>Kanal</dt><dd>Kararlı</dd>
         <dt>Manifest</dt><dd><a id="manifest-link" href="https://github.com/Powerss1/matcha-search-releases/releases/latest/download/latest.json">latest.json</a></dd>
       </dl>
@@ -212,7 +212,7 @@
     <div class="steps">
       <div class="card step">
         <h3>Kurulum dosyası (önerilen)</h3>
-        <p><code id="installer-name">MatchaSearch-setup-x64-1.1.8.exe</code> dosyasını indirip çalıştırın, Başlat menüsünden açın. Yönetici izni istemez; kaldırma kaydı otomatik oluşur.</p>
+        <p><code id="installer-name">MatchaSearch-setup-x64-1.1.9.exe</code> dosyasını indirip çalıştırın, Başlat menüsünden açın. Yönetici izni istemez; kaldırma kaydı otomatik oluşur.</p>
       </div>
       <div class="card step">
         <h3>Taşınabilir ZIP</h3>
@@ -231,7 +231,7 @@
     <div class="card step" style="margin-bottom:16px">
       <h3>PowerShell ile kontrol</h3>
       <p style="margin-bottom:10px">Komutu indirdiğiniz dosyanın bulunduğu klasörde çalıştırın. Çıktı bu sayfadaki hash ile aynı olmalı. Taşınabilir paket için <code>MatchaSearch-win-x64-&lt;sürüm&gt;.zip</code> yazın.</p>
-      <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.8.exe -Algorithm SHA256 | Format-List</pre>
+      <pre>Get-FileHash .\MatchaSearch-setup-x64-1.1.9.exe -Algorithm SHA256 | Format-List</pre>
     </div>
     <div class="steps">
       <div class="card step">
@@ -290,19 +290,19 @@
   </section>
 
   <footer class="site">
-    <span>Matcha Search 1.1.8 · yerel tasarım. Kaynak kapalı, ikili dosyalar herkese açık.</span>
+    <span>Matcha Search 1.1.9 · yerel tasarım. Kaynak kapalı, ikili dosyalar herkese açık.</span>
     <span><a href="../">English</a> · <a href="https://github.com/Powerss1/matcha-search-releases/releases">Sürümler</a> · <a href="https://github.com/Powerss1/matcha-search-releases">Depo</a></span>
   </footer>
 </div>
 
 <script>
   const fallback = {
-    version: '1.1.8',
-    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.8/MatchaSearch-setup-x64-1.1.8.exe',
-    setupSha256: 'b769161e8d66798c7a7b57689360ca6f56659e333f5341c59639ea894674d45b',
-    setupSize: 46909606,
-    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.8/MatchaSearch-win-x64-1.1.8.zip',
-    zipSize: 65723128
+    version: '1.1.9',
+    setupUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.9/MatchaSearch-setup-x64-1.1.9.exe',
+    setupSha256: '1d8833d63f9031d16ebb7b81e6b86e5570ea12ecb437cf2409d022d83a07fa44',
+    setupSize: 46912771,
+    zipUrl: 'https://github.com/Powerss1/matcha-search-releases/releases/download/v1.1.9/MatchaSearch-win-x64-1.1.9.zip',
+    zipSize: 65721033
   };
 
   const formatSize = (bytes) => {
